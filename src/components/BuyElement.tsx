@@ -3,14 +3,19 @@ import { useState } from "react";
 import TicketBlock from "./TicketBlock";
 
 const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
-  const [stage, setStage] = useState<number>(1);
-  const [cart, setCart] = useState<(TicketInfo & { quantity: number })[]>(
-    tickets.map((ticket) => ({
+  function initCart():
+    | (TicketInfo & { quantity: number })[]
+    | (() => (TicketInfo & { quantity: number })[]) {
+    return tickets.map((ticket) => ({
       ...ticket,
       quantity: 0,
-    }))
-  );
+    }));
+  }
 
+  const [stage, setStage] = useState<number>(1);
+  const [cart, setCart] = useState<(TicketInfo & { quantity: number })[]>(
+    initCart()
+  );
   const [buyerInfo, setBuyerInfo] = useState<BuyerProps>({
     name: "",
     email: "",
@@ -54,10 +59,15 @@ const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
     });
 
     if (buy.status == 200) {
-      const response = buy.json();
+      const response = await buy.json();
       console.log(response);
       setStage(3);
     } else alert("chyba");
+  };
+
+  const reset = () => {
+    setStage(1);
+    setCart(initCart());
   };
 
   const showStage = (): JSX.Element => {
@@ -132,6 +142,14 @@ const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
           </>
         );
 
+      case 3:
+        return (
+          <div>
+            <h3>Děkujeme</h3>
+            <p>Děkujeme za Vaši objednávku. Brzy Vás budeme kontaktovat!</p>
+            <button onClick={reset}>Objednat další</button>
+          </div>
+        );
       default:
         return <p>Jste mimo prostor a čas</p>;
     }
