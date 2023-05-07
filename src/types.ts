@@ -1,3 +1,5 @@
+import { ChangeEventHandler } from "react";
+
 export type TicketInfo = {
   id: number;
   name: string;
@@ -35,4 +37,20 @@ export type BuyerProps = {
   email: string;
   phone: string;
   agree: boolean;
+};
+
+type InputProps = {
+  label: string;
+  name: string;
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  required?: boolean;
+};
+
+export type TextInputProps = InputProps & {
+  type: "text" | "email";
+  value: string;
+};
+
+export type NumberInputProps = InputProps & {
+  value: string;
 };
