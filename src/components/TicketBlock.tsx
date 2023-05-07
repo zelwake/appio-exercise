@@ -12,7 +12,7 @@ const TicketBlock = ({
     <li>
       <div>
         <p>{name}</p>
-        <p>{price}</p>
+        <p>{price} CZK</p>
         <div>
           {quantity > 0 ? (
             <button onClick={() => modify(id, -1)}>-</button>
@@ -23,6 +23,7 @@ const TicketBlock = ({
           <button onClick={() => modify(id, 1)}>+</button>
         </div>
       </div>
+      {quantity > 0 && <p>Celková cena: {quantity * price} CZK</p>}
       <p>{info}</p>
     </li>
   );

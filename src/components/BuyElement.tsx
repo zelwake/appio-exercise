@@ -1,6 +1,7 @@
 import { BuyerProps, TicketInfo } from "@/types";
 import { useState } from "react";
 import Form from "./Form";
+import StageBar from "./StageBar";
 import TicketBlock from "./TicketBlock";
 
 const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
@@ -69,6 +70,13 @@ const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
                 <TicketBlock key={ticket.id} {...ticket} modify={modify} />
               ))}
             </ul>
+            <p>
+              Celková cena:{" "}
+              {cart.reduce((acc, ticket) => {
+                return acc + ticket.price * ticket.quantity;
+              }, 0)}{" "}
+              CZK
+            </p>
             <button onClick={() => setStage(2)}>Další krok</button>
           </>
         );
@@ -98,7 +106,12 @@ const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
     }
   };
 
-  return showStage();
+  return (
+    <>
+      <StageBar stage={stage} />
+      {showStage()}
+    </>
+  );
 };
 
 export default BuyElement;
