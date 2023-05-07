@@ -107,10 +107,17 @@ const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
 
       case 3:
         return (
-          <div>
-            <h3>Děkujeme</h3>
-            <p>Děkujeme za Vaši objednávku. Brzy Vás budeme kontaktovat!</p>
-            <button onClick={reset}>Objednat další</button>
+          <div className="border-2 px-4 py-2 rounded-md bg-lime-200">
+            <h3 className="text-xl mb-2">Děkujeme</h3>
+            <p className="text-sm mb-2">
+              Děkujeme za Vaši objednávku. Brzy Vás budeme kontaktovat!
+            </p>
+            <button
+              className="border-2 border-green-800 px-2 py-1 rounded-md font-semibold text-green-800 uppercase mb-2"
+              onClick={reset}
+            >
+              Objednat další
+            </button>
           </div>
         );
       default:
