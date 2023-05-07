@@ -1,7 +1,36 @@
-const festivalList = async () => {
+import FestivalBlock from "@/components/FestivalBlock";
+import { FestivalInfo, FestivalInfoJSON, TicketInfo } from "@/types";
+import { GetServerSideProps } from "next/types";
+import { useEffect, useState } from "react";
+
+const Home = ({ festivals }: { festivals: FestivalInfoJSON[] }) => {
+  const [selected, setSelected] = useState<number>(0);
+  const [tickets, setTickets] = useState<TicketInfo[]>([]);
+
+  const select = (id: number) => {
+    setSelected(id);
+  };
+
+  useEffect(() => {
+    console.log(selected);
+  }, [selected]);
+  return (
+    <>
+      <h1>Tickets</h1>
+      <ul>
+        {festivals.map((fest) => (
+          <FestivalBlock key={fest.id} {...fest} select={select} />
+        ))}
+      </ul>
+    </>
+  );
+};
+export default Home;
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
   // some database query to get all the festival info
 
-  const festivals = [
+  const festivalList: FestivalInfo[] = [
     {
       id: 1,
       name: "Dobrej",
@@ -68,18 +97,7 @@ const festivalList = async () => {
     },
   ];
 
-  return { festivals };
+  return {
+    props: { festivals: JSON.parse(JSON.stringify(festivalList)) },
+  };
 };
-
-const Home = async () => {
-  const festivals = await festivalList();
-  return (
-    <>
-      <h1>Tickets</h1>
-      {festivals.festivals.map((fest) => (
-        <p key={fest.id}>{fest.name}</p>
-      ))}
-    </>
-  );
-};
-export default Home;
