@@ -29,3 +29,10 @@ export type TicketBlockInfo = {
   id: number;
   modify: (id: number, change: number) => void;
 };
+
+export type BuyerProps = {
+  name: string;
+  email: string;
+  phone: string;
+  agree: boolean;
+};
