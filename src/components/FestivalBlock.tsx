@@ -3,20 +3,18 @@ const FestivalBlock = ({
   name,
   date,
   place,
-  select,
 }: {
   id: number;
   name: string;
   date: string;
   place: string;
-  select: (id: number) => void;
 }) => {
   return (
-    <li onClick={() => select(id)}>
+    <div>
       <h2>{name}</h2>
       <time>{parseDate(date)}</time>
       <p>{place}</p>
-    </li>
+    </div>
   );
 };
 

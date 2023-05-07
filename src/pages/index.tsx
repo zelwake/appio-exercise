@@ -1,25 +1,31 @@
+import BuyElement from "@/components/BuyElement";
 import FestivalBlock from "@/components/FestivalBlock";
-import { FestivalInfo, FestivalInfoJSON, TicketInfo } from "@/types";
+import { FestivalInfo, FestivalInfoJSON } from "@/types";
 import { GetServerSideProps } from "next/types";
 import { useEffect, useState } from "react";
 
 const Home = ({ festivals }: { festivals: FestivalInfoJSON[] }) => {
   const [selected, setSelected] = useState<number>(0);
-  const [tickets, setTickets] = useState<TicketInfo[]>([]);
-
-  const select = (id: number) => {
-    setSelected(id);
-  };
 
   useEffect(() => {
     console.log(selected);
   }, [selected]);
+
   return (
     <>
       <h1>Tickets</h1>
       <ul>
         {festivals.map((fest) => (
-          <FestivalBlock key={fest.id} {...fest} select={select} />
+          <li key={fest.id}>
+            <FestivalBlock key={fest.id} {...fest} />
+            {selected == fest.id ? (
+              <BuyElement tickets={fest.tickets} />
+            ) : (
+              <button onClick={() => setSelected(fest.id)}>
+                Koupit lístek
+              </button>
+            )}
+          </li>
         ))}
       </ul>
     </>
@@ -38,16 +44,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       date: new Date(),
       tickets: [
         {
+          id: 1234,
           name: "Základní",
           price: 12,
           info: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         },
         {
+          id: 5678,
           name: "Rozšířená",
           price: 25,
           info: "Deleniti eum autem voluptatum temporibus, eaque beatae dicta cumque ipsam libero adipisci, blanditiis, optio fuga qui quos maiores numquam expedita explicabo ad.",
         },
         {
+          id: 1598,
           name: "Backstage příplatek",
           price: 90,
           info: "Můžeš do backstage.",
@@ -61,11 +70,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       date: new Date(),
       tickets: [
         {
+          id: 9681,
           name: "Základní",
           price: 75,
           info: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         },
         {
+          id: 38576,
           name: "Rozšířená",
           price: 325,
           info: "Deleniti eum autem voluptatum temporibus, eaque beatae dicta cumque ipsam libero adipisci, blanditiis, optio fuga qui quos maiores numquam expedita explicabo ad.",
@@ -79,16 +90,19 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       date: new Date(),
       tickets: [
         {
+          id: 9785,
           name: "Základní",
           price: 5,
           info: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
         },
         {
+          id: 684351,
           name: "Rozšířená",
           price: 15,
           info: "Deleniti eum autem voluptatum temporibus, eaque beatae dicta cumque ipsam libero adipisci, blanditiis, optio fuga qui quos maiores numquam expedita explicabo ad.",
         },
         {
+          id: 813857,
           name: "Kotel",
           price: 85,
           info: "Deleniti eum autem voluptatum temporibus, eaque beatae dicta cumque ipsam libero adipisci, blanditiis, optio fuga qui quos maiores numquam expedita explicabo ad.",
