@@ -64,22 +64,29 @@ const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
     switch (stage) {
       case 1:
         return (
-          <>
-            <h2>Lístky</h2>
+          <div>
+            <h2 className="text-xl my-2">Lístky</h2>
             <ul>
               {cart.map((ticket) => (
                 <TicketBlock key={ticket.id} {...ticket} modify={modify} />
               ))}
             </ul>
-            <p>
-              Celková cena:{" "}
-              {cart.reduce((acc, ticket) => {
-                return acc + ticket.price * ticket.quantity;
-              }, 0)}{" "}
-              CZK
+            <p className="flex justify-between border-2 rounded-md shadow-md py-2 px-4 mb-4 font-semibold">
+              <span>Celková cena:</span>
+              <span>
+                {cart.reduce((acc, ticket) => {
+                  return acc + ticket.price * ticket.quantity;
+                }, 0)}{" "}
+                CZK
+              </span>
             </p>
-            <button onClick={() => setStage(2)}>Další krok</button>
-          </>
+            <button
+              className="text-center w-full bg-lime-600 text-gray-100 font-semibold tracking-wider p-1 rounded-md shadow-md"
+              onClick={() => setStage(2)}
+            >
+              Další krok
+            </button>
+          </div>
         );
 
       case 2:

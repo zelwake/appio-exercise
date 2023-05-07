@@ -15,7 +15,7 @@ const Home = ({ festivals }: { festivals: FestivalInfoJSON[] }) => {
     <>
       <ul className="p-5">
         {festivals.map((fest) => (
-          <li className="mb-5" key={fest.id}>
+          <li className="mb-10" key={fest.id}>
             <FestivalBlock key={fest.id} {...fest} />
             {selected == fest.id ? (
               <BuyElement tickets={fest.tickets} />
