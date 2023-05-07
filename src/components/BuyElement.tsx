@@ -74,9 +74,10 @@ const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
             <p className="flex justify-between border-2 rounded-md shadow-md py-2 px-4 mb-4 font-semibold">
               <span>Celková cena:</span>
               <span>
-                {cart.reduce((acc, ticket) => {
-                  return acc + ticket.price * ticket.quantity;
-                }, 0)}{" "}
+                {cart.reduce(
+                  (acc, ticket) => acc + ticket.price * ticket.quantity,
+                  0
+                )}{" "}
                 CZK
               </span>
             </p>
@@ -92,7 +93,10 @@ const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
       case 2:
         return (
           <>
-            <p onClick={() => setStage(1)}>&larr; Zpět</p>
+            <p className="font-bold text-lime-600" onClick={() => setStage(1)}>
+              &larr; Zpět
+            </p>
+            <p className="text-xl my-2">Vaše údaje</p>
             <Form
               {...buyerInfo}
               sendRequest={sendRequest}

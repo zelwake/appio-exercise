@@ -29,8 +29,7 @@ const Form = ({
 
   return (
     <>
-      <p>Vaše údaje</p>
-      <form>
+      <form className="border-2 rounded-md shadow-md py-2 px-4 mb-4 flex flex-col gap-2">
         <TextInput
           label="Celé jméno"
           name="name"
@@ -75,7 +74,11 @@ const Form = ({
           Souhlasím se vším*
         </label>
       </form>
-      <button onClick={() => sendRequest()} disabled={validated()}>
+      <button
+        className="text-center w-full bg-lime-600 text-gray-100 font-semibold tracking-wider p-1 rounded-md shadow-md disabled:bg-gray-600"
+        onClick={() => sendRequest()}
+        disabled={validated()}
+      >
         Odeslat
       </button>
     </>
