@@ -13,15 +13,17 @@ const Home = ({ festivals }: { festivals: FestivalInfoJSON[] }) => {
 
   return (
     <>
-      <h1>Tickets</h1>
-      <ul>
+      <ul className="p-5">
         {festivals.map((fest) => (
-          <li key={fest.id}>
+          <li className="mb-5" key={fest.id}>
             <FestivalBlock key={fest.id} {...fest} />
             {selected == fest.id ? (
               <BuyElement tickets={fest.tickets} />
             ) : (
-              <button onClick={() => setSelected(fest.id)}>
+              <button
+                className="text-center w-full bg-lime-500 text-gray-50 font-semibold tracking-wider p-1 rounded-md shadow-md "
+                onClick={() => setSelected(fest.id)}
+              >
                 Koupit lístek
               </button>
             )}

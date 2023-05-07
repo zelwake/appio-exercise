@@ -65,6 +65,7 @@ const BuyElement = ({ tickets }: { tickets: TicketInfo[] }) => {
       case 1:
         return (
           <>
+            <h2>Lístky</h2>
             <ul>
               {cart.map((ticket) => (
                 <TicketBlock key={ticket.id} {...ticket} modify={modify} />
