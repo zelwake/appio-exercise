@@ -59,7 +59,7 @@ const Form = ({
           }
           required
         />
-        <label>
+        <label className="mb-2 text-sm">
           <input
             type="checkbox"
             checked={agree}

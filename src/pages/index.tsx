@@ -13,7 +13,7 @@ const Home = ({ festivals }: { festivals: FestivalInfoJSON[] }) => {
 
   return (
     <>
-      <ul className="p-5">
+      <ul className="p-5 lg:max-w-2xl lg:m-auto">
         {festivals.map((fest) => (
           <li className="mb-10" key={fest.id}>
             <FestivalBlock key={fest.id} {...fest} />
